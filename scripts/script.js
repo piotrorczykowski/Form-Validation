@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
-    const usernameField = $("#username");
+    const usernameField = $('#username');
+    const passwordField = $('#password');
 
     const isBlank = name => name == '' ? true : false;
     const isBetween = (lenght, min, max) => lenght < min || lenght > max ? false : true;
@@ -19,10 +20,30 @@ $(document).ready(function()
         }
     }
 
+    const isPasswordSecure = password => {
+        const regularExpression = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+        return regularExpression.test(password);
+    }
+
+    function checkPassword()
+    {
+        const password = passwordField.val().trim();
+ 
+        if(!isBlank(password) && isPasswordSecure(password))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     $('#submit').click(function(e)
     {
         e.preventDefault();
 
         checkUsername();
+        checkPassword();
     });
 });
