@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
     const usernameField = $('#username');
+    const emailField = $('#email');
     const passwordField = $('#password');
     const passwordConfirmField = $('#confirm-password');
 
@@ -12,6 +13,25 @@ $(document).ready(function()
         const username = usernameField.val().trim();
 
         if(!isBlank(username) && isBetween(username.length, 3, 25))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    const isEmailValid = email => {
+        const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return regularExpression.test(email);
+    };
+
+    function checkEmail()
+    {
+        const email = emailField.val().trim();
+
+        if(!isBlank(email) && isEmailValid(email))
         {
             return true;
         }
@@ -60,6 +80,7 @@ $(document).ready(function()
         e.preventDefault();
 
         checkUsername();
+        checkEmail();
         checkPassword();
         checkConfirmPassword();
     });
