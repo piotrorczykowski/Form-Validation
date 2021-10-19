@@ -79,9 +79,56 @@ $(document).ready(function()
     {
         e.preventDefault();
 
-        checkUsername();
-        checkEmail();
-        checkPassword();
-        checkConfirmPassword();
+        if(!checkUsername())
+        {
+            usernameField.removeClass('success')
+            usernameField.addClass('error')
+            usernameField.next().text('Username must be between 3 and 25 characters')
+        }
+        else
+        {
+            usernameField.removeClass('error')
+            usernameField.next().text('')
+            usernameField.addClass('success')
+        }
+
+        if(!checkEmail())
+        {
+            emailField.removeClass('success')
+            emailField.addClass('error')
+            emailField.next().text('Invalid email address')
+        }
+        else
+        {
+            emailField.removeClass('error')
+            emailField.next().text('')
+            emailField.addClass('success')
+        }
+
+        if(!checkPassword())
+        {
+            passwordField.removeClass('success')
+            passwordField.addClass('error')
+            passwordField.next().text('Password mus has at least 8 characters that include at least 1 lowercase character, 1 uppercase characters, 1 number and 1 special character in (!@#$%^&*)')
+        }
+        else
+        {
+            passwordField.removeClass('error')
+            passwordField.next().text('')
+            passwordField.addClass('success')
+        }
+
+        if(!checkConfirmPassword())
+        {
+            passwordConfirmField.removeClass('success')
+            passwordConfirmField.addClass('error')
+            passwordConfirmField.next().text('Passwords are not the same')
+        }
+        else
+        {
+            passwordConfirmField.removeClass('error')
+            passwordConfirmField.next().text('')
+            passwordConfirmField.addClass('success')
+        }
     });
 });
